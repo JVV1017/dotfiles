@@ -1,0 +1,341 @@
+;==========================================================
+;
+;
+;   ██████╗  ██████╗ ██╗  ██╗   ██╗██████╗  █████╗ ██████╗
+;   ██╔══██╗██╔═══██╗██║  ╚██╗ ██╔╝██╔══██╗██╔══██╗██╔══██╗
+;   ██████╔╝██║   ██║██║   ╚████╔╝ ██████╔╝███████║██████╔╝
+;   ██╔═══╝ ██║   ██║██║    ╚██╔╝  ██╔══██╗██╔══██║██╔══██╗
+;   ██║     ╚██████╔╝███████╗██║   ██████╔╝██║  ██║██║  ██║
+;   ╚═╝      ╚═════╝ ╚══════╝╚═╝   ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝
+;
+;
+;   To learn more about how to configure Polybar
+;   go to https://github.com/polybar/polybar
+;
+;   The README contains a lot of information
+;
+;==========================================================
+
+########################################################################
+########################################################################
+####
+####                   COLOR THEMES
+####
+########################################################################
+########################################################################
+
+[colors]
+background = #cba6f7
+background-alt = #11111b
+foreground = #11111b
+foreground-alt = #ffffff
+primary = #ffb52a
+secondary = #e60053
+safe = #00FF00
+warning = #FFFF00 
+alert = #FF0000
+
+########################################################################
+########################################################################
+####
+####                   BAR CONFIG
+####
+########################################################################
+########################################################################
+
+[bar/example]
+monitor = ${env:MONITOR:}
+width = 100%
+height = 27
+radius = 0.0
+fixed-center = true
+top = yes
+bottom = no
+override-redirect = false
+foreground = ${colors.foreground-alt}
+background = ${colors.background-alt}
+wm-restack = i3
+scroll-up = #i3.next
+scroll-down = #i3.prev
+cursor-click = pointer
+
+; Under-/overline pixel size and argb color
+; Individual values can be defined using:
+;   {overline,underline}-size
+;   {overline,underline}-color
+line-size = 0
+line-color = #dfdfdf
+
+border-top-size = 0
+border-bottom-size = 0
+border-left-size = 0
+border-right-size = 0
+
+padding-left = 0
+padding-right = 0
+
+module-margin-left = 0
+module-margin-right = 0
+
+########################################################################
+########################################################################
+####
+####                   FONTS (Text, Glyphs/Emojis)
+####
+########################################################################
+########################################################################
+
+font-0 = Hack:pixelsize=11;3
+;font-1 = Weather Icons:style=Regular:size=10;2
+;font-2 = "Wuncon Siji:pixelsize=10;3"
+font-1 = FontAwesome6Free:style=Solid:pixelsize=10;3
+font-2 = FontAwesome6Brands:style=Solid:pixelsize=10;3
+font-3 = FontAwesome:style=Solid:pixelsize=10;3
+
+########################################################################
+########################################################################
+####
+####                   BAR CONTENTS
+####
+########################################################################
+########################################################################
+
+modules-left = i3 sp1 xwindow
+modules-center = date
+modules-right = wifi sp1 cpu sp1 memory sp1 backlight sp1 volume sp1 battery sp1 systray
+
+########################################################################
+########################################################################
+####
+####                   MODULES
+####
+########################################################################
+########################################################################
+
+# LINE 1
+[module/sp1]
+type = custom/text
+content = " | "
+content-foreground = #93A1A1
+content-background = ${colors.background-alt}
+
+# LINE 2
+[module/sp2]
+type = custom/text
+content = " |"
+content-foreground = #93A1A1
+content-background = ${colors.background-alt}
+
+# I3WM (WORKSPACES)
+[module/i3]
+type = internal/i3
+format = <label-state> <label-mode>
+index-sort = true
+wrapping-scroll = false
+strip-wsnumbers = false
+enable-click = true
+enable-scroll = true
+
+label-mode = %mode%
+label-mode-padding = 1
+label-mode-foreground = ${colors.foreground-alt}
+label-mode-background = ${colors.background-alt}
+
+# Workspaces
+;ws-icon-0 = 1;
+;ws-icon-1 = 2;
+;ws-icon-2 = 3;
+;ws-icon-3 = 4;
+;ws-icon-4 = 5;
+;ws-icon-5 = 6;
+;ws-icon-6 = 7;
+;ws-icon-7 = 8;
+;ws-icon-8 = 9;
+
+; focused = Active workspace on focused monitor (%icon for icons)
+label-focused = %index%		
+label-focused-foreground = ${colors.foreground}
+label-focused-background = ${colors.background}
+label-focused-underline = ${colors.foreground-alt}
+label-focused-padding = 1
+
+; unfocused = Inactive workspace on any monitor
+label-unfocused = %index%
+label-unfocused-padding = ${self.label-focused-padding}
+label-unfocused-foreground = ${colors.foreground-alt}
+label-unfocused-background = ${colors.background-alt}
+
+; visible = Active workspace on unfocused monitor
+label-visible = %index%
+label-visible-foreground = ${self.label-focused-background}
+label-visible-background = ${self.label-focused-foreground}
+label-visible-underline = ${self.label-focused-underline}
+label-visible-padding = ${self.label-focused-padding}
+
+; urgent = Workspace with urgency hint set
+label-urgent = %index%
+label-urgent-foreground = ${colors.foreground}
+label-urgent-background = ${colors.alert}
+label-urgent-padding = 1
+
+; Separator in between workspaces
+label-separator =
+label-separator-padding = 0
+label-separator-foreground = #fff
+
+# XWINDOW (Title of Window)
+[module/xwindow]
+type = internal/xwindow
+label = %title%
+label-maxlen = 50
+
+# BATTERY
+[module/battery]
+type = internal/battery
+battery = BATT
+adapter = ACAD
+full-at = 100
+low-at = 5
+label-charging = %percentage%%
+format-charging = <animation-charging> <label-charging>
+label-discharging = %percentage%%
+format-discharging = <animation-discharging> <label-discharging>
+label-full = FULL
+format-full =  <label-full>
+label-full-foreground = ${colors.safe}
+label-low = LOW
+format-low = <label-low> <animation-low>
+label-low-foreground = ${colors.alert}
+animation-charging-0 = 
+animation-charging-1 = 
+animation-charging-2 = 
+animation-charging-3 = 
+animation-charging-4 = 
+animation-charging-framerate = 750
+animation-discharging-0 = 
+animation-discharging-1 = 
+animation-discharging-2 = 
+animation-discharging-3 = 
+animation-discharging-4 = 
+animation-discharging-framerate = 500
+animation-low-0 = !
+animation-low-1 = 
+animation-low-framerate = 200
+
+# WIFI
+[module/wifi]
+type = internal/network
+interface = wlan0
+interface-type = wireless
+interval = 3
+format-connected =  <label-connected>
+format-disconnected =  <label-disconnected>
+label-connected = %essid% 
+label-connected-foreground = ${colors.foreground-alt} 
+label-disconnected = OFF
+label-disconnected-foreground = ${colors.alert} 
+
+# MEMORY
+[module/memory]
+type = internal/memory
+interval = 3
+format-prefix = " "
+label = %percentage_used:2%%
+format-warn-percentage = ${colors.alert} %percentage:2%%
+warn-percentage = 90
+
+# CPU
+[module/cpu]
+type = internal/cpu
+interval = 3
+format-prefix = " "
+label = %percentage:2%%
+format-warn-percentage = ${colors.alert} %percentage:2%%
+warn-percentage = 90
+
+# BACKLIGHT
+[module/backlight]
+type = internal/backlight
+card = amdgpu_bl0
+use-actual-brightness = true
+poll-interval = 0
+enable-scroll = true
+scroll-interval = 10
+format = <ramp> <label>
+label = %percentage%%
+ramp-0 = 
+ramp-1 = 
+
+# SYSTEM TRAY
+[module/systray]
+type = internal/tray
+format-margin = 2pt
+tray-spacing = 5pt
+
+# DATE
+[module/date]
+type = internal/date
+interval = 1
+date = %a %b %d 
+time = %I:%M %p
+label =  %date%   %time%
+;label-foreground = ${colors.primary}
+
+# VOLUME
+[module/volume]
+type = internal/pulseaudio
+use-ui-max = true
+format-volume = <ramp-volume> <label-volume>
+label-volume = %percentage%%
+label-muted = " MUTED"
+;label-muted-foreground = ${colors.alert}
+ramp-volume-0 = 
+ramp-volume-1 = 
+ramp-volume-2 =  
+click-right = pavucontrol
+click-middle = pavucontrol
+
+# HOME DISK
+[module/hdisk]
+type = internal/fs
+interval = 15
+mount-0 = /home
+label-mounted =  %free%
+label-unmounted = %mountpoint% not mounted
+
+# SYSTEM DISK
+[module/rdisk]
+type = internal/fs
+interval = 15
+mount-0 = /
+label-mounted =  %free%
+label-unmounted = %mountpoint% not mounted
+
+# LINUX VERSION
+[module/linux-ver]
+type = custom/script
+exec = uname -r
+interval = 600
+
+# PACMAN & AUR UPDATES
+[module/updates]
+type = custom/script
+exec = ~/.config/polybar/scripts/arch_updates.sh
+interval = 60
+label = %output%
+
+# EXTRA SETTINGS 
+[settings]
+throttle-output = 5
+throttle-output-for = 10
+;throttle-input-for = 30
+screenchange-reload = true
+compositing-background = over
+compositing-foreground = over
+compositing-overline = over
+compositing-border = over
+
+# WM CONFIG
+[global/wm]
+margin-top = 5
+margin-bottom = 5
