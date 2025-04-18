@@ -1,0 +1,77 @@
+configuration {
+    modes: "window,drun,run,emoji,calc";
+    font: "FontAwesome 15";
+    show-icons: true;
+    icon-theme: "Papirus-Dark";
+    drun-display-format: "{icon} {name}";
+    display-window: "Windows:";
+    display-drun: "Applications:";
+}
+
+@theme "/dev/null"
+
+* {
+    bg: #11111b;
+    bg-alt: #cba6f7;
+    
+    fg: #ffffff;
+    fg-alt: #a3b8e0;
+
+    background-color: @bg;
+    
+    border: 0;
+    margin: 0;
+    padding: 0;
+    spacing: 0;
+}
+
+window {
+    width: 45%;
+}
+
+element {
+    padding: 12;
+    text-color: @fg-alt;
+}
+
+element selected {
+    text-color: @fg;
+}
+
+element-text {
+    background-color: inherit;
+    text-color: inherit;
+    vertical-align: 0.5;
+}
+
+element-icon {
+    size: 30;
+}
+
+entry {
+    background-color: @bg-alt;
+    padding: 12;
+    text-color: #11111b;
+}
+
+inputbar {
+    children: [prompt, entry];
+}
+
+listview {
+    background-color: @bg;
+    column: 1;
+    lines: 8;
+}
+
+mainbox {
+    background-color: @bg;
+    children: [inputbar, listview];
+}
+
+prompt{
+    background-color: @bg-alt;
+    enabled: true;
+    padding: 12 0 0 12;
+    text-color: #11111b;
+}
