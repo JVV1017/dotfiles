@@ -203,8 +203,6 @@ set $ws20 "20"
 # Key bindings for switching to the next/previous workspace
 bindsym $mod+Left workspace prev
 bindsym $mod+Right workspace next
-bindsym Mod1+Left workspace prev
-bindsym Mod1+Right workspace next
 
 # Key bindings for switching workspaces on the first monitor (using Mod)
 bindsym $mod+1 workspace number $ws1
