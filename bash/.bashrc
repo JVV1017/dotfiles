@@ -56,9 +56,6 @@ alias big="expac -H M '%m\t%n' | sort -h | nl"              # Sort installed pac
 alias gitpkg='pacman -Q | grep -i "\-git" | wc -l'          # List amount of -git packages
 alias update='sudo pacman -Syu'
 
-# Get fastest mirrors
-alias mirror="sudo cachyos-rate-mirrors"
-
 # Help people new to Arch
 alias apt='man pacman'
 alias apt-get='man pacman'
@@ -107,6 +104,7 @@ alias battery='upower -i /org/freedesktop/UPower/devices/battery_BATT'
 alias feh='feh --scale-down'
 alias starship-update='curl -sS https://starship.rs/install.sh | sh'
 alias process-count='ps aux | wc -l'
+alias mirrors='sudo reflector --verbose --latest 10 --protocol https --sort rate --save /etc/pacman.d/mirrorlist'
 
 # SCRIPT BASED ALIASES 
 alias metadata-update='~/Documents/scripts/update_metadata.sh'
@@ -165,7 +163,7 @@ if command -v fzf &>/dev/null; then
 fi
 
 # RANDOM COLOR SCRIPT BY DISTRO TUBE (DT)
-colorscript -e 7
+colorscript -e 12
 
 ########################################################################
 ########################################################################
@@ -186,3 +184,7 @@ export FZF_DEFAULT_OPTS=" \
 #### QT THEMING VARIABLES
 export QT_QPA_PLATFORMTHEME="kvantum"
 export QT_QPA_PLATFORMTHEME="qt6ct"
+
+#### LOCALE
+export LANG=en_CA.UTF-8
+export LC_ALL=en_CA.UTF-8
