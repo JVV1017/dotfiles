@@ -1,0 +1,6 @@
+[General]
+theme=catppuccin-mocha-mauve
+
+[Applications]
+Default=flameshot
+catppuccin-mocha-mauve=flameshot
